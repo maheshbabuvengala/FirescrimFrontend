@@ -21,7 +21,7 @@ const Home = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get('https://firescrimbackend.onrender.com/api/items');
+        const response = await axios.get('https://firescrimbackend.onrender.com/api/items',, { withCredentials: true });
         setTransactions(response.data);
         setUsername(response.data[0].username); // Assuming the username is the same for all transactions
         setLoading(false);
