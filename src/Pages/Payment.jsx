@@ -15,38 +15,45 @@ const Payment = () => {
   const [free,setfree] = useState('')
   const [usernames, setUsernames] = useState('');
 
-  // const [username,setusername] = useState();
-  // const [freefireid , setfreefireid] = useState();
   const [upiid,setupiid] = useState();
-  // const [status,setstatus] = useState();
   
 
 
   const navigate =useNavigate()
 
   
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [user, setUser] = useState('');
+  const [freefire,setfreefire] = useState('')
+
   useEffect(() => {
-    // console.log('All cookies:', document.cookie);
+    const fetchTransactions = async () => {
+      try {
+        const response = await axios.get('https://firescrimbackend.onrender.com/api/items');
+        setTransactions(response.data);
+        setUser(response.data[0].username);
+        setfreefire(response.data[0].freefireid);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching transactions:', error);
+        setError('Error fetching transactions. Please try again later.');
+        setLoading(false);
+      }
+    };
 
-    const usernameCookie = Cookies.get('username');
-    const freeid = Cookies.get("freefireid")
-    // console.log('Username cookie:', usernameCookie);
-
-    if (usernameCookie) {
-      setUsernames(usernameCookie);
-      setfree(freeid);
-    } else {
-      setUsernames('No cookie found');
-      setfree('No cookie found');
-    }
+    fetchTransactions();
   }, []);
-  const username =usernames;
-  const freefireid= free;
+
+
+  const username =user;
+  const freefireid= freefire;
   const status ="Success";
 
   const handleSubmit =(e) => {
     e.preventDefault();
-    axios.post("https://firescrimbackend.onrender.com/payment",{username,freefireid,upiid,status})
+    axios.post("http://localhost:3003/payment",{username,freefireid,upiid,status})
     .then(
       navigate('/home')
     )
