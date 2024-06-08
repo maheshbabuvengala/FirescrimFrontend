@@ -1,0 +1,95 @@
+.payment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;}
+  
+.left {
+  width: 50%;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+  
+.right {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
+.right img {
+  height: 550px;
+  width: 60%;
+  border-radius: 15px;
+}
+  
+.imgs {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+  
+.imgs img {
+  height: 200px;
+  width: 200px;
+}
+.ins{
+  margin-top: 40px;
+}
+  
+.input {
+  /* margin-top: 40px; */
+  width: 400px;
+  height: 50px;
+  border-radius: 5px;
+}
+  
+.bttn {
+  margin-top: 20px;
+}
+  
+@media only screen and (max-width: 890px) {
+  .payment {
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
+  
+  .right {
+    width: 70%;
+  }
+  .right img {
+     width: 100%;
+    height: 400px;
+  }
+  
+  .left {
+    align-items: center;
+    height: 400px;
+    width: 100%;
+  }
+  
+  .wel {
+    margin-left: 15px;
+  }
+  
+  .input {
+    width: 350px;
+    border: 2px solid black;
+  }
+}
+  
+  @media only screen and (max-width: 1400px) {
+    .imgs {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .left {
+      height: auto;
+    }
+  }
+  
