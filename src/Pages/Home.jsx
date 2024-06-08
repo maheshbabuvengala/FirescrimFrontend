@@ -10,27 +10,35 @@ import { FaSquareInstagram } from "react-icons/fa6";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { BsTelegram } from "react-icons/bs";
 import Cookies from 'js-cookie';
+import axios from 'axios';
 
 const Home = () => {
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [username, setUsername] = useState('');
 
   useEffect(() => {
-    console.log('All cookies:', document.cookie);
+    const fetchTransactions = async () => {
+      try {
+        const response = await axios.get('https://firescrimbackend.onrender.com/api/items');
+        setTransactions(response.data);
+        setUsername(response.data[0].username); // Assuming the username is the same for all transactions
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching transactions:', error);
+        setError('Error fetching transactions. Please try again later.');
+        setLoading(false);
+      }
+    };
 
-    const usernameCookie = Cookies.get('username');
-    console.log('Username cookie:', usernameCookie);
-
-    if (usernameCookie) {
-      setUsername(usernameCookie);
-    } else {
-      setUsername('No cookie found');
-    }
+    fetchTransactions();
   }, []);
 
   return (
     <div className="content">
       <Navbar />
-      <h1 style={{color:"rgb(255, 77, 0)",fontWeight:"800"}}>Welcome: {username} <span>&#128591;</span></h1>
+      <h1 style={{color:"rgb(255, 77, 0)",fontWeight:"800"}}>Welcome: {username}<span>&#128591;</span></h1>
       <Banner />
       
       <div className="container my-4">
