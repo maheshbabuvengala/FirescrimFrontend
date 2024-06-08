@@ -31,7 +31,7 @@ const Payment = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get('https://firescrimbackend.onrender.com/api/items');
+        const response = await axios.get('https://firescrimbackend.onrender.com/api/items',, { withCredentials: true });
         setTransactions(response.data);
         setUser(response.data[0].username);
         setfreefire(response.data[0].freefireid);
