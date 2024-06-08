@@ -20,20 +20,26 @@ const Home = () => {
 
   useEffect(() => {
     const fetchTransactions = async () => {
-      try {
-        const response = await axios.get('https://firescrimbackend.onrender.com/api/items',, { withCredentials: true });
-        setTransactions(response.data);
-        setUsername(response.data[0].username); // Assuming the username is the same for all transactions
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching transactions:', error);
-        setError('Error fetching transactions. Please try again later.');
-        setLoading(false);
-      }
+        try {
+            const response = await axios.get('https://firescrimbackend.onrender.com/api/items', { withCredentials: true });
+            console.log('Response data:', response.data);
+            if (response.data && response.data.length > 0) {
+                setItems(response.data);
+                setUsername(response.data[0].username); // Assuming all items have the same username
+            } else {
+                setError('No transactions found.');
+            }
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching transactions:', error);
+            setError('Error fetching transactions. Please try again later.');
+            setLoading(false);
+        }
     };
 
     fetchTransactions();
-  }, []);
+}, []);
+
 
   return (
     <div className="content">
