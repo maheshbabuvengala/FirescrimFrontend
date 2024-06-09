@@ -9,6 +9,7 @@ const Signup = () => {
   const [username,setusername] = useState();
   const [password,setpassword] = useState();
   const [freefireid,setfreefireid] = useState();
+  const [phoneno,setphoneno] = useState();
   const navigate = useNavigate();
   let a= document.getElementById("error")
   
@@ -16,7 +17,7 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post ('https://firescrimbackend.onrender.com/register',{name,username,password,freefireid})
+    axios.post ('https://firescrimbackend.onrender.com/register',{name,username,password,freefireid,phoneno})
     .then(result => {console.log(result) 
         if(result.data == "user already exists"){
           a.textContent ="user already exists";
@@ -40,6 +41,7 @@ const Signup = () => {
             <input type="text" name="" id=""  placeholder='Username' onChange={(e) => setusername(e.target.value)}/>
             <input type="text" name="" id="" placeholder='Password' onChange={(e)=> setpassword(e.target.value)}/>
             <input type="text" name="" id="" placeholder='Freefire-Id' onChange={(e)=> setfreefireid(e.target.value)}/>
+            <input type="text" name="" id="" placeholder='Phone number' onChange={(e)=> setphoneno(e.target.value)}/>
             <div className="check">
                 <input type="checkbox" name="" id="" />
                 <a href="">Accept terms&conditions</a>
